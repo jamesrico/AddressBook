@@ -1,17 +1,17 @@
 language: node_js
 node_js:
-  - '0.10'
+- '0.10'
 before_install:
-  - npm install -g npm
-  - npm install -g bower
-  - bower install
-  - export DISPLAY=:99.0
-  - sh -e /etc/init.d/xvfb start
+- npm install -g npm
+- npm install -g bower
+- bower install
+- export DISPLAY=:99.0
+- sh -e /etc/init.d/xvfb start
 script:
-  - npm run test-once
+- npm run test-once
 after_script:
-  - cat ./coverage/PhantomJS*/lcov.info | ./node_modules/codeclimate-test-reporter/bin/codeclimate.js
+- cat ./coverage/PhantomJS*/lcov.info | ./node_modules/codeclimate-test-reporter/bin/codeclimate.js
 env:
   global:
-    - secure: wUh/n/Yb/MsBZJt2Vwgo/M451wZzGl7lMExEem+UAHzhBXZmlYQvXZKQuF2BrhvNObxapD7KWRpwTiIr/vgPn3W3zciEWsKpbBgd9ojssRV8ZQwJ3b+4mCGeiC5mmpB7aZE3WaY0XcRPHtf4gnowslIdNGHlTvBYQtvj5JBJOOw=
-    - secure: fcevHrbmiKtLhcokPgjvKGz27lAeLXJmQnGPKr/2erSPQjgg71uyNij7o+kOuEP6DmT++hdgQfw6n6QXjzRyRuNDr53c0OaARkfWSiN/imAmZzV3RELBhKuEd3f9oTuaOnpxXWaFdTGI5cBkoWaebztNRyJ+FgowNdhbGuEXrig=
+  - secure: UZ4xG4dfNdUAmHYqiIiZvLARUgmisE+7C/DQPfdxeMkj2E9a1dfEgrFShV4xoQvmoKw5DLBIJxtPFet94OFQZ59Vh292DVPy0n9k/yxMSDYDKb4Yjl6DvCZ/zrjrY09ye8UFWphH3YllupB22scr0pEpt4hmMyNTOUVLIb3wUC4=
+  - secure: jIs+iON0j9yu4qX0dFCMPP4iaxOnPyJp2CfyKOPLaQ6gQtEg6IIQzwBDFmLXcue6qmdG/dSWNY2drhDUaQJujASWJWqEC6LdVMwfeF7NBVmF780lZMKhTU0SuCEJVdgqFmLGwg8/U18nOQyzabyhLk2Q5TgEmo8HT8hMYGOF/cw=
