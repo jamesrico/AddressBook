@@ -2,9 +2,9 @@
   "name": "AddressBook",
   "version": "1.0.0",
   "description": "Using tests(mocha, chai), api firebase",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "main": "../test/index.html",
+  "directories": {
+    "test": "test"
   },
   "repository": {
     "type": "git",
@@ -32,9 +32,8 @@
     "mocha-phantomjs": "^3.5.3",
     "phantomjs": "^1.9.15"
   },
-    "scripts": {
+  "scripts": {
     "test": "./node_modules/karma/bin/karma start",
     "test-once": "npm run test -- --single-run"
   }
-
 }
