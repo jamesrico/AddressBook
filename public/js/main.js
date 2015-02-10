@@ -7,4 +7,3 @@ function hello() {
   return 'world';
 }
 
-

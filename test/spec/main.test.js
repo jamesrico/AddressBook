@@ -1,4 +1,5 @@
 
+'use strict';
 
 describe('test suite', function () {
   it('should assert true', function () {
