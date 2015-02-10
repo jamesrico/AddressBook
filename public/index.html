@@ -10,19 +10,19 @@
   <body>
         <h1>My Address Book App</h1>
         <div>
-          <button class="newcontactbutton" value="New Contact">
-          <form action="#" method="POST" class="newcontactform">
-            First Name:<input type="text" name="firstname" placeholder="Kobe">
+          <button class="newcontactbutton" type="button">New Contact</button>
+        </div>
+          <form action="#" method="POST" id="newcontactform">
+            First Name:<input class="contactinput" id="firstname" type="text" name="firstname" placeholder="Kobe">
             <br>
-            Last Name:<input type="text" name="lastname" placeholder="Bryant">
+            Last Name:<input class="contactinput" id="lastname" type="text" name="lastname" placeholder="Bryant">
             <br>
-            Email:<input type="email" placeholder="blackmamba24@gmail.com">
+            Email:<input class="contactinput" id="email" type="email" placeholder="blackmamba24@gmail.com">
             <br>
-            Photo URL:<input type="url" placeholder="https://nba.com/lakers/kobe_bryant">
+            Photo URL:<input class="contactinput" id="photourl" type="url" placeholder="https://nba.com/lakers/kobe_bryant">
             <br>
-            <input type="submit" class="submitnewcontact" value="Submit New Contact">
+            <button id="submitcontact" type="submit">Submit</button>
           </form>
-
         </div>
           <table>
           <h3>Contact List</h5>
@@ -31,11 +31,6 @@
         </table>
       </div>
     </div>
-
-    <div class="container">
-      <h1>My Site Title</h1>
-    </div>
-
     <script src="../bower_components/jquery/dist/jquery.min.js"></script>
     <script src="../public/js/main.js"></script>
     <script src="js/main.js"></script>

@@ -9,11 +9,3 @@ table {
   background-color: blue;
 }
 
-
-//////////jquery
-
-$('.newcontactbutton').click(function() {
-  $('.newcontactform').show();
-  });
-
-
