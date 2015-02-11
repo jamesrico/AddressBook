@@ -13,8 +13,9 @@ after_script:
   - cat ./coverage/PhantomJS*/lcov.info | ./node_modules/codeclimate-test-reporter/bin/codeclimate.js
 after_success:
   - npm install -g firebase-tools
-  - firebase deploy
-env:
-  global:
+  - if [[ "$TRAVIS_PULL_REQUEST" == "false" ]] && [[ "$TRAVIS_BRANCH" == "master" ]]; then npm run deploy; fienv:
+global:
   - secure: UZ4xG4dfNdUAmHYqiIiZvLARUgmisE+7C/DQPfdxeMkj2E9a1dfEgrFShV4xoQvmoKw5DLBIJxtPFet94OFQZ59Vh292DVPy0n9k/yxMSDYDKb4Yjl6DvCZ/zrjrY09ye8UFWphH3YllupB22scr0pEpt4hmMyNTOUVLIb3wUC4=
   - secure: jIs+iON0j9yu4qX0dFCMPP4iaxOnPyJp2CfyKOPLaQ6gQtEg6IIQzwBDFmLXcue6qmdG/dSWNY2drhDUaQJujASWJWqEC6LdVMwfeF7NBVmF780lZMKhTU0SuCEJVdgqFmLGwg8/U18nOQyzabyhLk2Q5TgEmo8HT8hMYGOF/cw=
+  - secure: HJaVfrtmGx9X6Edz8rrzbkxh6DTbQf6DE0Dk2VzFm/0a5nHk/QeAsAON91lpZFecjrdWgnpySKgpUYWWIkHUMC5chPGw2mNFO84J/IUjKAUCXhVA7nS6MvRLes7ZcsvVjw4E7ouEnDIiMbKftCDexP2McwRENozNee3ICwEV4E4=
+  - secure: WMdfRzwW+B5wbRiu0fue0+AXdadvWOq0KFVe9pYBV0aktvnWlBAFzjQJn5h5l669VyKl9nLbbO7UyJh6AAbvNhx+LlrbQENglMUIX8Q9P2fiZYK/x8eckGe7mAM8X+4FFr0s6cph8fBv2f3dPNTmfz+S0CJZC/XoFQzNOTp4QOw=
