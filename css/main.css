@@ -2,10 +2,40 @@
 
 
 body {
-  background-color: orange;
+  background-color: #adb6bc;
 }
 
 table {
-  background-color: blue;
+  background-color: #698832;
+}
+
+h1 {
+  text-align: center;
+  color: #343c14;
+}
+
+h5 {
+  text-align: 5%;
+  color: #343c14;
+}
+
+tr {
+  border-bottom: 3px solid #343c14;
+}
+.contactinput {
+  display: inline-block;
+  width: 50%;
+  height: 5%;
+  text-align: center;
+}
+
+
+.hidden {
+  display: none;
+}
+
+#newcontactbutton {
+  display: inline-block;
+  background-color: #698832;
 }
 
