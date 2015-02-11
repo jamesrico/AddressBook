@@ -1,9 +1,11 @@
-/* jshint jquery: true */
-/* global async: false */
+/* jshint node: true */
 
 
 'use strict';
-
+//////////****
+////var $ = require ('jquery'),
+    ///_ = require ('lodash'),
+    ///Firebase = require('firebase');
 
 function hello() {
   return 'world';
@@ -61,17 +63,4 @@ function addContactRow(uuid, info){
 
   $trcontact.attr('data-uuid', uuid);
   $('#tableofcontacts').append($trcontact);
-
-  ('#removebutton').on('click', function (event){
-
-    var url = 'https://myaddressbookapp.firebaseio.com/'+uuid+'.json'
-        $tr = $('tr').closest();
-    
-    event.preventDefault();
-    event.remove($tr);
-    $.ajax(url, {type: 'DELETE'});
-
-
-  })
-
-}
+  }

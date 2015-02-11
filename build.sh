@@ -9,8 +9,15 @@ mkdir public/js
 # Copy html and css files in the app folder into the public directory and preserve directories
 # Add additional file extensions if needed i.e. images, fonts, etc..
 cd app
-find . -type f \( -name "*.html" -o -name "*.css" \) | cpio -pdvm ../public
+find . -type f \( -name "*.html" -o -name "*.css" -o -name "*.js" \) | cpio -pdvm ../public
 cd ..
+
+# Copy bower_components js files
+mkdir public/vendor
+cp bower_components/jquery/dist/jquery.min.js public//vendor
+cp bower_components/lodash/lodash.min.js public/vendor
+cp bower_components/firebase/firebase.js public/vendor
+
 
 ###############################
 # Jade (npm intalled locally) #

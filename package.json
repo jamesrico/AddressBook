@@ -17,7 +17,6 @@
   },
   "homepage": "https://github.com/jamesrico/AddressBook",
   "devDependencies": {
-    "browserify": "^8.1.3",
     "chai": "^1.10.0",
     "codeclimate-test-reporter": "0.0.4",
     "install": "^0.1.8",
@@ -36,8 +35,11 @@
     "phantomjs": "^1.9.15"
   },
   "scripts": {
-    "test": "./node_modules/karma/bin/karma start",
+    "karma": "./node_modules/karma/bin/karma start",
+    "test": "npm run build && npm run karma",
     "test-once": "npm run test -- --single-run",
-    "deploy": "firebase --email ${FIREBASE_EMAIL} --password ${FIREBASE_PASSWORD} deploy"
+    "deploy": "firebase --email ${FIREBASE_EMAIL} --password ${FIREBASE_PASSWORD} deploy",
+    "build": "./build.sh",
+    "watch": "./watch.sh"
   }
 }
