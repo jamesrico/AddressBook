@@ -1,3 +1,4 @@
+
 /* jshint jquery: true */
 /* global async: false */
 
@@ -7,6 +8,7 @@
 function hello() {
   return 'world';
 }
+
 
 /////created call to get firebase objects
 $.get('https://myaddressbookapp.firebaseio.com/.json', function(res){
@@ -124,3 +126,4 @@ $('tbody').on('click', '#removebutton', function (evt) {
 }
 
 ///////now i need to create a login and register page///
+

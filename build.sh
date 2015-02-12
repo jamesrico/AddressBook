@@ -14,17 +14,11 @@ cd ..
 
 # Copy bower_components js files
 mkdir public/vendor
-<<<<<<< HEAD
+
 cp bower_components/jquery/dist/jquery.min.js public/vendor
 cp bower_components/lodash/lodash.min.js public/vendor
 cp bower_components/firebase/firebase.js public/vendor
 cp bower_components/jquery/dist/jquery.min.map public/vendor
-
-=======
-cp bower_components/jquery/dist/jquery.min.js public//vendor
-cp bower_components/lodash/lodash.min.js public/vendor
-cp bower_components/firebase/firebase.js public/vendor
->>>>>>> 31cc518f5e0915d151785b1cacfaddc75e2164b3
 
 
 ###############################
@@ -53,14 +47,8 @@ rm -rf public/_*.html
 #####################################
 
 # Bundle 3rd-party depenedencies
-<<<<<<< HEAD
 ## ./node_modules/browserify/bin/cmd.js app/js/common.js -d -o public/js/common.js
 
 # Bundle main dependencies
 ##./node_modules/browserify/bin/cmd.js app/js/main.js -d -o public/js/main.js
-=======
-./node_modules/browserify/bin/cmd.js app/js/common.js -d -o public/js/common.js
 
-# Bundle main dependencies
-./node_modules/browserify/bin/cmd.js app/js/main.js -d -o public/js/main.js
->>>>>>> 31cc518f5e0915d151785b1cacfaddc75e2164b3
