@@ -1,6 +1,5 @@
 /* jshint node: true */
 
-
 'use strict';
 //////////****
 ////var $ = require ('jquery'),
@@ -11,56 +10,77 @@ function hello() {
   return 'world';
 }
 
-$.get('https://myaddressbookapp.firebaseio.com/.json', function(res){
-    if(res !== null) {
-    Object.keys(res).forEach(function(uuid){
-      addContactRow(uuid,res[uuid]);
+  var FIREBASE_URL = 'https://myaddressbookapp.firebaseio.com/.json';
+
+  $.get(FIREBASE_URL, function (contact) {
+    Object.keys(contact).forEach(function (uuid) {
+    addContactToTable(uuid, contact[uuid]);
     });
-    } else {}
   });
 
-$('#newcontactbutton').click(function(evt){
-    evt.preventDefault();
-    $('#newcontactform').toggleClass('hidden');
+
+  $('#submitcontact').on('click', newContactSubmitForm);
+
+
+function newContactSubmitForm (evt) {
+
+  var $trs = $('tr'),
+      $FirstName = $('#firstname').val(),
+      $LastName = $('#lastname').val(),
+      $Email = $('#email').val(),
+      $Twitter = $('#twitter').val(),
+      $PhotoURL = $('#photoURL').val();
+
+  var res = {FirstName: $FirstName, LastName: $LastName, Email: $Email, Twitter: $Twitter, PhotoURL: $PhotoURL};
+
+  var url = FIREBASE_URL,
+      jsonifiedData = JSON.stringify(res);
+
+  console.log(url);
+  console.log(jsonifiedData);
+
+  $.post(url, jsonifiedData, function(res){ return res;});
+
+  $('#newcontactform').submit( function (evt){
+      evt.preventDefault();
+      alert('Contact Submitted!');
+      document.getElementById('newcontactform').reset();
   });
 
-$('#submitcontact').on('click', function(event){
-  event.preventDefault();
+ };
 
-  var $tr = $('<tr></tr>'),
-    photoURL = $('#photourl').val(),
-    firstName = $('#firstname').val(),
-    lastName = $('#lastname').val(),
-    ioEmail = $('#email').val(),
-    ioTwitter = $('#twitter').val(),
-    $newcontactinfo = $('<td><img src='+photoURL+'>/img</td><td>'+firstName+'</td><td>'+lastName+'</td><td>'+ioEmail+'</td><td>'+ioTwitter+'</td>'),
-    url = 'https://myaddressbookapp.firebaseio.com/.json',
-    data = JSON.stringify({photourl: photoURL, firstname: firstName, lastname: lastName, email: ioEmail, twitter: ioTwitter});
+function addContactToTable(uuid, res) {
+};
 
+$('tbody').on('click', '#removebutton', function (evt) {
 
-  $.post(url, data, function(res){
-      $tr.attr('data-uuid', res.name);
-    });
+  var $tr  = $(evt.target).closest('tr'),
+      uuid = $tr.data('uuid'),
+      friendName = $tr.find('tr').text();
 
-  $($tr).append($newcontactinfo);
+  if (confirmContactRemoval(friendName)) {
+    $tr.remove();
+    deleteContactFromFirebase(uuid);
+  }
+});
 
-  $('#tableofcontacts').append($tr);
+function deleteContactFromFirebase(uuid) {
+  var url = FIREBASE_URL + uuid + '.json';
 
-  $('#newcontactform').toggleClass('hidden');
+  $.ajax(url, {type: 'DELETE'});
+}
 
-  this.form.reset();
- })
+function confirmContactRemoval(contactName) {
+  var confirmationText = 'Remove ' + friendName + ' from friend list?',
+      isConfirmed      = window.confirm(confirmationText);
 
-function addContactRow(uuid, info){
-  var $trcontact = $('<tr></tr>'),
-      $contactphoto = $('<td><img src='+info.photourl+'></img></td>'),
-      $contactinfo = $('<td>'+info.firstname+'</td><td>'+info.lastname+'</td><td>'+info.email+'</td><td>'+info.twitter+'</td><td>'),
-      $rmvbutton = $('<td><button id="removebutton">Remove</button></td>');
-
-  $trcontact.append($contactphoto);
-  $trcontact.append($contactinfo);
-  $trcontact.append($rmvbutton);
-
+<<<<<<< HEAD:app/js/main.js
   $trcontact.attr('data-uuid', uuid);
   $('#tableofcontacts').append($trcontact);
   }
+=======
+  return isConfirmed;
+}
+
+
+>>>>>>> parent of 3be9bfb... started anew app and reconstructed everything:public/js/main.js
