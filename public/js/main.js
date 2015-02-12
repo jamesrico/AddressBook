@@ -18,6 +18,52 @@ $.get('https://myaddressbookapp.firebaseio.com/.json', function(res){
   });
 //////added a click event new contact
 ///////added a click event that submitted and posted to account
+
+$('#loginbutton').click(function (event){
+  var FIREBASE_URL = 'https://myaddressbookapp.firebaseio.com/.json';
+  var fb = Firebase(FIREBASE_URL);
+  
+event.preventDefault();
+
+var usersFb;
+
+
+
+if (fb.getAuth()) {
+  usersFbUrl = FIREBASE_URL + '/users/' + fb.getAuth().uid + '/data';
+}
+
+  var $loginForm = $(event.target.closest('form')),
+      email      = $loginForm.find('[type="email"]').val(),
+      pass       = $loginForm.find('[type="password"]').val(),
+      data       = {email: email, password: pass};
+
+
+  registerAndLogin(data, function (err, auth) {
+    if (err) {
+      $('.error').text(err);
+    } else {
+      location.reload(true);
+    }
+  })
+
+$('#newcontact').toggleClass('hidden');
+
+
+
+$('form').on('click', '#logout', function logout(){
+  fb.unauth();
+  location.reload(true);
+})
+})
+
+
+
+  $('#loginbutton').click(function(evt){
+  evt.preventDefault();
+  $('#loginform').toggleClass('hidden');
+})
+
 $('#newcontactbutton').click(function(evt){
     evt.preventDefault();
     $('#newcontactform').toggleClass('hidden');

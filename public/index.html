@@ -10,10 +10,17 @@
     <body>
         <div class="large-12 columns">
           <h1>My Address Book App</h1>
-        </div>
-          <div>
+        <form id="loginform" action"#">
+        <input type="email">
+        <br>
+        <input type="password">
+        <br>
+        <button type="button" id="loginbutton">Login</button>
+        <button type="button" id="register">Register</button>
+        </form>
+         <div>
           <button id="newcontactbutton" type="button">New Contact</button>
-          </div>
+        </div>
             <div class="row">
               <div class="large-3 columns">
                 <form action="#" id="newcontactform" class="hidden">
@@ -43,9 +50,9 @@
               </table>
              </div>
             </div>
-    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="../public/js/main.js"></script>
-    <script src="https://cdn.firebase.com/js/client/2.1.2/firebase.js"></script>
+     <script src="vendor/jquery.min.js"></script>
+     <script src="vendor/firebase.js"></script>
+     <script src="js/main.js"></script>
   </body>
 </html>
 

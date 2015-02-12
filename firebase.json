@@ -1,6 +1,6 @@
 {
   "firebase": "myaddressbookapp",
-  "public": ".",
+  "public": "public",
   "ignore": [
     "firebase.json",
     "**/.*",

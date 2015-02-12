@@ -1,13 +1,10 @@
 /* jshint node: true */
 
 'use strict';
-<<<<<<< HEAD:app/js/main.js
 //////////****
 ////var $ = require ('jquery'),
     ///_ = require ('lodash'),
     ///Firebase = require('firebase');
-=======
->>>>>>> parent of 3be9bfb... started anew app and reconstructed everything:public/js/main.js
 
 function hello() {
   return 'world';
@@ -21,7 +18,11 @@ function hello() {
     });
   });
 
-
+$('#newcontactbutton').click(function(evt){
+   evt.preventDefault();
+   $('#newcontactform').toggleClass('hidden');
+   });
+  
   $('#submitcontact').on('click', newContactSubmitForm);
 
 
@@ -73,17 +74,5 @@ function deleteContactFromFirebase(uuid) {
   $.ajax(url, {type: 'DELETE'});
 }
 
-function confirmContactRemoval(contactName) {
-  var confirmationText = 'Remove ' + friendName + ' from friend list?',
-      isConfirmed      = window.confirm(confirmationText);
-
-<<<<<<< HEAD:app/js/main.js
-  $trcontact.attr('data-uuid', uuid);
-  $('#tableofcontacts').append($trcontact);
-  }
-=======
-  return isConfirmed;
-}
 
 
->>>>>>> parent of 3be9bfb... started anew app and reconstructed everything:public/js/main.js
