@@ -9,7 +9,11 @@ mkdir public/js
 # Copy html and css files in the app folder into the public directory and preserve directories
 # Add additional file extensions if needed i.e. images, fonts, etc..
 
+<<<<<<< HEAD
 nodemon -e html,css --watch app \
+=======
+nodemon -e html.css --watch app \
+>>>>>>> 31cc518f5e0915d151785b1cacfaddc75e2164b3
   --exec "cd app; find . -type f \( -name '*.html' -o -name '*.css' \) | cpio -pdvm ../public; cd .." &
 
 nodemon --watch app/js \
@@ -20,6 +24,11 @@ mkdir public/vendor
 cp bower_components/jquery/dist/jquery.min.js public/vendor
 cp bower_components/lodash/lodash.min.js public/vendor
 cp bower_components/firebase/firebase.js public/vendor
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 31cc518f5e0915d151785b1cacfaddc75e2164b3
 ###############################
 # Jade (npm intalled locally) #
 ###############################
@@ -48,4 +57,9 @@ nodemon -e scss --watch app/styles \
 # ./node_modules/watchify/bin/cmd.js app/js/common.js -d -o public/js/common.js &
 
 # Bundle main dependencies
+<<<<<<< HEAD
 # ./node_modules/watchify/bin/cmd.js app/js/main.js -d -o public/js/main.js &ain.js &
+=======
+# ./node_modules/watchify/bin/cmd.js app/js/main.js -d -o public/js/main.js &
+
+>>>>>>> 31cc518f5e0915d151785b1cacfaddc75e2164b3
