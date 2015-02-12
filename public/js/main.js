@@ -22,7 +22,7 @@ $.get('https://myaddressbookapp.firebaseio.com/.json', function(res){
 $('#loginbutton').click(function (event){
   var FIREBASE_URL = 'https://myaddressbookapp.firebaseio.com/.json';
   var fb = Firebase(FIREBASE_URL);
-  
+
 event.preventDefault();
 
 var usersFb;
