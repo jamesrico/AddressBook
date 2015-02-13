@@ -1,6 +1,4 @@
-
-/* jshint jquery: true */
-/* global async: false */
+/* jshint browser: true, jquery: true */
 
 'use strict';
 
@@ -9,68 +7,106 @@ function hello() {
   return 'world';
 }
 
+var ref = new Firebase("https://myaddressbookapp.firebaseio.com");
+////unhide signout and button and sign out of account
 
-/////created call to get firebase objects
-$.get('https://myaddressbookapp.firebaseio.com/.json', function(res){
-    if(res !== null) {
-    Object.keys(res).forEach(function(uuid){
-      addContactRow(uuid,res[uuid]);
-    });
-    } else {}
-  });
+$('#loginform').on('click', '#loginbutton', function (event){
+  event.preventDefault();
+  $('#signout').toggleClass('hidden');
+});
+
+$('#loginform').on('click', '#signout', function (event) {
+  ref.unauth();
+  location.reload(true);
+});
+
+/////// now to create a login to store data and authenticate
 //////added a click event new contact
 ///////added a click event that submitted and posted to account
 
-$('#loginbutton').click(function (event){
-  var FIREBASE_URL = 'https://myaddressbookapp.firebaseio.com/.json';
-  var fb = Firebase(FIREBASE_URL);
+$('#loginform').on('click', '#loginbutton', function (event){
 
-event.preventDefault();
-
-var usersFb;
-
+  event.preventDefault();
+/////create a new contact button that displays form and hides again
+  $('#newcontact').toggleClass('hidden');
+/////////create login and register
 
 
-if (fb.getAuth()) {
-  usersFbUrl = FIREBASE_URL + '/users/' + fb.getAuth().uid + '/data';
+
+var fireBaseUrl = "https://myaddressbookapp.firebaseio.com";
+var usersFbUrl;
+
+if(ref.getAuth()){
+
+  usersFbUrl = fireBaseUrl + '/users/' + ref.getAuth().uid + '/data';
+  $.get(usersFbUrl + "/contacts.json", function(res){
+    _.forEach(Object.keys(res), function(uuid){
+      var newURL = usersFbUrl + "/contacts/" + uuid + ".json";
+      $.get(newURL, function(info){
+      var $trcontact = $('<tr id="trcontact"></tr>'),
+        $contactphoto = $('<td><img src='+info.photourl+'></img></td>'),
+        $contactinfo = $('<td>'+info.firstname+'</td><td>'+info.lastname+'</td><td>'+info.email+'</td><td>'+info.twitter+'</td><td>'),
+        $rmvbutton = $('<td><button id="removebutton">Remove</button></td>');
+////appended to table
+  $trcontact.append($contactphoto);
+  $trcontact.append($contactinfo);
+  $trcontact.append($rmvbutton);
+        $trcontact.attr('data-uuid', uuid);
+        $('#tableofcontacts').append($trcontact);
+     });
+    });
+  });
 }
-
-  var $loginForm = $(event.target.closest('form')),
-      email      = $loginForm.find('[type="email"]').val(),
-      pass       = $loginForm.find('[type="password"]').val(),
-      data       = {email: email, password: pass};
+})
 
 
+$('#loginform').on('click', '#loginbutton', function (event) {
   registerAndLogin(data, function (err, auth) {
     if (err) {
       $('.error').text(err);
     } else {
       location.reload(true);
     }
-  })
+  });
 
-$('#newcontact').toggleClass('hidden');
+  var $loginForm = $(event.target),
+      email      = $loginForm.find('[type="email"]').val(),
+      pass       = $loginForm.find('[type="password"]').val(),
+      data       = {email: email, password: pass};
 
+  event.preventDefault();
 
+  ref.authWithPassword(data, function(err, auth) {
+     if (err) {
+      $('.error').text(err);
+    } else {
+      location.reload(true);
+    }
+  });
 
-$('form').on('click', '#logout', function logout(){
-  fb.unauth();
-  location.reload(true);
+function auth(obj, cb) {
+  ref.createUser(obj, function(err) {
+    if (!err) {
+      fb.authWithPassword(obj, function (err, auth){
+        if (!err) {
+          cb(null, auth);
+        } else {
+          cb(err);
+        }
+      });
+    } else {
+      cb(err);
+    }
+    })
+}
 })
-})
-
-
-
-  $('#loginbutton').click(function(evt){
-  evt.preventDefault();
-  $('#loginform').toggleClass('hidden');
-})
-
+///////////created a button to show new contact form
 $('#newcontactbutton').click(function(evt){
     evt.preventDefault();
     $('#newcontactform').toggleClass('hidden');
    });
-  
+//////make a new function that processes form and spits out a row
+   //
 $('#submitcontact').on('click', function(event){
   event.preventDefault();
 
@@ -82,11 +118,11 @@ $('#submitcontact').on('click', function(event){
     ioTwitter = $('#twitter').val(),
     $newcontactinfo = $('<td><img src='+photoURL+'>/img</td><td>'+firstName+'</td><td>'+lastName+'</td><td>'+ioEmail+'</td><td>'+ioTwitter+'</td>'),
     url = 'https://myaddressbookapp.firebaseio.com/.json',
-    data = JSON.stringify({photourl: photoURL, firstname: firstName, lastname: lastName, email: ioEmail, twitter: ioTwitter});
+    contacts = JSON.stringify({photourl: photoURL, firstname: firstName, lastname: lastName, email: ioEmail, twitter: ioTwitter});
 
 /////posted to firebase
-  $.post(url, data, function(res){
-      $tr.attr('data-uuid', res.name);
+  $.post(url, contacts, function(res){
+      $tr.attr('contacts-uuid', res.name);
     });
 ////apppended to table
   $($tr).append($newcontactinfo);
@@ -117,7 +153,7 @@ function addContactRow(uuid, info){
 ////click event for the remove button
 $('tbody').on('click', '#removebutton', function (evt) {
 
-  var url ='https://myaddressbookapp.firebaseio.com/'+uuid+ '.json',
+  var url = usersFbUrl+ '/contacts/.json',
       $tr = $(this).closest('tr');
 
   $tr.remove();
